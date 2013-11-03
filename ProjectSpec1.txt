@@ -1,0 +1,13 @@
+Develop a prototype ERD for your project.
+– Must have at least 8 tables, with appropriate relations.
+– Must demonstrate the 3 types of relationships (1:1, 1:M, M:N)
+– Must demonstrate the optionality of the relationships
+
+– Write a (2 page maximum) word document to describe your current project plans:
+     • Project Idea
+     • Business Rules
+     • Layout
+     • Entities involved
+– Due April 3rd. Submission will be available on Moodle.
+– You will be able to add/remove entities and relations after this date.
+The project may be updated over the duration of the module (so long as documentation is kept up to date to support the changes)

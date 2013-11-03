@@ -1,0 +1,12 @@
+--Trigger that displays the old price and the new after the price has been changed.
+
+CREATE OR REPLACE TRIGGER PriceUpdate
+	AFTER UPDATE --trigger is executed after the update occurs.
+	ON products
+	FOR EACH ROW
+	BEGIN --Displays the new price and the old price, but only if the price has been changed.
+		IF :new.p_price != :old.p_price THEN
+		DBMS_OUTPUT.PUT_LINE('Price Updated to: ' || :new.p_price || ' - from: ' || :old.p_price);
+		END IF;
+END;
+/

@@ -1,0 +1,100 @@
+CREATE TABLE roles(
+	r_id NUMBER(2) NOT NULL,
+	r_name VARCHAR2(30) NOT NULL,
+	PRIMARY KEY(r_id)
+);
+
+CREATE TABLE users(
+	u_id NUMBER(10) NOT NULL,
+	u_fname	VARCHAR2(30) NOT NULL,
+	u_lname	VARCHAR2(30) NOT NULL,
+	u_username VARCHAR2(30) UNIQUE NOT NULL,
+	u_dob DATE NOT NULL,
+	u_phone VARCHAR2(15) NOT NULL,
+	u_email	VARCHAR2(80) NOT NULL,
+	u_address VARCHAR2(100) NOT NULL,
+	r_id,
+	PRIMARY KEY(u_id),
+	FOREIGN KEY(r_id)
+	REFERENCES roles(r_id)
+);
+
+CREATE TABLE passwords(
+	pass_id NUMBER(10) NOT NULL,
+	password VARCHAR2(32) NOT NULL,
+	PRIMARY KEY(pass_id),
+	FOREIGN KEY(pass_id)
+	REFERENCES users(u_id)
+);
+
+CREATE TABLE order_status(
+	s_id NUMBER(2) NOT NULL,
+	s_name VARCHAR2(15) NOT NULL,
+	PRIMARY KEY(s_id)
+);
+
+CREATE TABLE orders(
+	o_id NUMBER(10) NOT NULL,
+	u_id NUMBER(10) NOT NULL,
+	s_id NUMBER(2) NOT NULL,
+	date_ordered DATE NOT NULL,
+	PRIMARY KEY(o_id),
+	FOREIGN KEY(u_id)
+	REFERENCES users(u_id),
+	FOREIGN KEY(s_id)
+	REFERENCES order_status(s_id)
+);
+
+CREATE TABLE type(
+	t_id NUMBER(2) NOT NULL,
+	t_name VARCHAR2(30) NOT NULL,
+	PRIMARY KEY(t_id)
+);
+
+CREATE TABLE brand(
+	b_id NUMBER(5) NOT NULL,
+	b_name VARCHAR2(30) NOT NULL,
+	PRIMARY KEY(b_id)
+);
+
+CREATE TABLE category(
+	c_id NUMBER(5) NOT NULL,
+	c_name VARCHAR2(30) NOT NULL,
+	PRIMARY KEY(c_id)
+);
+
+CREATE TABLE products(
+	P_id NUMBER(10) NOT NULL,
+	p_name VARCHAR2(100) NOT NULL,
+	p_price DECIMAL(7,2) NOT NULL,
+	t_id NUMBER(2) NOT NULL,
+	b_id NUMBER(5) NOT NULL,
+	p_description CLOB,
+	PRIMARY KEY(p_id),
+	FOREIGN KEY(t_id)
+	REFERENCES type(t_id),
+	FOREIGN KEY(b_id)
+	REFERENCES brand(b_id)
+);
+
+CREATE TABLE product_cat(
+	p_id NUMBER(10) NOT NULL,
+	c_id NUMBER(5) NOT NULL,
+	PRIMARY KEY(p_id,c_id),
+	FOREIGN KEY(p_id)
+	REFERENCES products(p_id),
+	FOREIGN KEY(c_id)
+	REFERENCES category(c_id)
+);
+
+CREATE TABLE order_products(
+	o_id NUMBER(10) NOT NULL,
+	p_id NUMBER(10) NOT NULL,
+	quantity NUMBER(3) NOT NULL,
+	notes CLOB,
+	PRIMARY KEY(o_id,p_id),
+	FOREIGN KEY(o_id)
+	REFERENCES orders(o_id),
+	FOREIGN KEY(p_id)
+	REFERENCES products(p_id)
+);

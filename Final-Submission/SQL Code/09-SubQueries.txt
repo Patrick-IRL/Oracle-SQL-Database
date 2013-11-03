@@ -1,0 +1,50 @@
+--list categories of specific product
+
+SELECT c.c_name Categories
+FROM category c
+WHERE c.c_id IN (SELECT c_id FROM product_cat WHERE p_id = 1);
+
+
+
+
+--list products having specific category
+
+SELECT p.p_name Products
+FROM products p
+WHERE p.p_id IN (SELECT p_id FROM product_cat WHERE c_id = 1);
+
+
+
+
+--list products with price above or equal to 300 euro
+
+SELECT p.p_name Products
+FROM products p
+WHERE p.p_id IN (SELECT p_id FROM products p WHERE p.p_price >= 300);
+
+
+
+
+--list site owner/admins
+
+SELECT u.u_fname Name, u.u_lname Surname,
+u.u_username Username
+FROM users u
+WHERE r_id IN
+(SELECT r_id FROM roles 
+ WHERE r_name = 'Owner' OR r_name = 'Administrator');
+
+
+
+
+--list orders where status is not complete
+
+SELECT o.o_id OrderNum, s.s_name Status,
+o.date_ordered DateOrdered, u.u_username Username
+FROM orders o
+INNER JOIN users u
+ON u.u_id = o.u_id
+INNER JOIN order_status s
+ON s.s_id = o.s_id
+WHERE s.s_id IN (SELECT s_id FROM order_status WHERE s_name != 'Complete')
+ORDER BY o.o_id;

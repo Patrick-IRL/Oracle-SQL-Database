@@ -1,0 +1,21 @@
+
+    Minimum of 4 rows inserted per table
+    4 INNER JOIN queries with descriptions
+    6 OUTER JOIN (2xleft,2xfull,2xright) queries with descriptions
+    1 CUBE query (with at least 2 columns)
+    5 examples of subqueries
+    5 PL/SQL procedures
+    1 PL/SQL function
+    3 Triggers (at least 1 before, and at least 1 after)
+    Exception handling on all PL/SQL
+    Use cursors in at least 1 PL/SQL procedure
+
+    Document everything
+    Include SQL comments in your code!
+    Should include information about changes you make
+    What could be done better?
+    Unsure about anything-include it!
+    Any flaws?
+    Add some extra features to your project that are appropriate.
+    –Extras can be anything covered during class or can be what you learned from elsewhere. Be Creative!
+

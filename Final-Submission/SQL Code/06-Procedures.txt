@@ -1,0 +1,273 @@
+--A procedure to display how many times a specific product has been ordered.
+
+CREATE OR REPLACE PROCEDURE TimesOrderedProc
+	(productid IN NUMBER) --used to determine which product to query.
+IS
+	TimesOrdered NUMBER; --used to store the number of times a product was ordered.
+BEGIN
+	--Sums the quantity, but only for the specified product.
+	--This accounts for occasions where more than one of the product was ordered in a single order.
+	SELECT SUM(quantity) INTO TimesOrdered FROM order_products WHERE p_id = productid;
+	DBMS_OUTPUT.PUT_LINE('This product has been ordered ' || TimesOrdered || ' times.');
+--This is where exception handling is carried out.
+EXCEPTION
+	WHEN OTHERS THEN --A cath all exception, which will return info on any errors that occur.
+	raise_application_error(-20001, 'An error ocurred - ' || SQLCODE || ' -ERROR- ' || SQLERRM);
+END;
+/
+
+
+--Example block calling the TimesOrderedProc procedure
+DECLARE
+	productid NUMBER := 1;
+BEGIN
+	TimesOrderedProc(productid);
+END;
+/
+
+
+
+
+
+
+--A procedure to show how much a specified user has spent in our store.
+
+CREATE OR REPLACE PROCEDURE TotalSpentByCustomer
+	(userid IN NUMBER)
+IS
+	TotalSpent NUMBER;
+BEGIN
+	SELECT SUM(p.p_price*op.quantity) INTO TotalSpent
+	FROM users u
+	INNER JOIN orders o ON o.u_id = u.u_id
+	INNER JOIN order_products op ON op.o_id = o.o_id
+	INNER JOIN products p ON p.p_id = op.p_id
+	WHERE u.u_id = userid;
+	DBMS_OUTPUT.PUT_LINE('This customer has spent ' || TotalSpent || ' Euros.');
+	
+--This is where exception handling is carried out.
+EXCEPTION
+	WHEN OTHERS THEN --A cath all exception, which will return info on any errors that occur.
+	raise_application_error(-20001, 'An error ocurred - ' || SQLCODE || ' -ERROR- ' || SQLERRM);
+END;
+/
+
+
+--Example block calling the TotalSpentByCustomer procedure
+DECLARE
+	userid NUMBER := 11;
+BEGIN
+	TotalSpentByCustomer(userid);
+END;
+/
+
+
+
+
+
+
+
+
+
+--A procedure to give the current status of a specified order.
+
+CREATE OR REPLACE PROCEDURE OrderStatus
+	(orderid IN NUMBER)
+IS
+	current_status VARCHAR2(15);
+BEGIN
+	SELECT s.s_name INTO current_status
+	FROM order_status s
+	INNER JOIN orders o
+	ON o.s_id = s.s_id
+	WHERE o.o_id = orderid;
+	
+	DBMS_OUTPUT.PUT_LINE('Current Order Status: ' || current_status);
+	
+--This is where exception handling is carried out.
+EXCEPTION
+	WHEN OTHERS THEN --A cath all exception, which will return info on any errors that occur.
+	raise_application_error(-20001, 'An error ocurred - ' || SQLCODE || ' -ERROR- ' || SQLERRM);
+END;
+/
+
+
+--Example block calling the OrderStatus procedure
+DECLARE
+	orderid NUMBER := 5;
+BEGIN
+	OrderStatus(orderid);
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE ListProductCategories
+	(productid IN NUMBER)
+IS	
+	cat VARCHAR2(30);
+	
+	CURSOR cur_prod_cat IS
+	SELECT p.p_name Product, c.c_name Category
+	FROM products p
+	INNER JOIN product_cat pc
+	ON pc.p_id = p.p_id
+	INNER JOIN category c
+	ON c.c_id = pc.c_id
+	WHERE p.p_id = productid;
+
+	--declaring a variable that will have same type as cursor
+	--this means it will have matching columns to the cursor
+	v_pc_row cur_prod_cat%ROWTYPE;
+
+BEGIN
+	OPEN cur_prod_cat; --cursors must be opened to be used.
+
+	--inserts the data from cursor into the variable v_emp_row
+	FETCH cur_prod_cat INTO
+	v_pc_row;
+
+	DBMS_OUTPUT.PUT_LINE('Categories for: ' || v_pc_row.Product);
+	--loops while there is still data to retrieve
+	WHILE cur_prod_cat%FOUND LOOP
+		
+		DBMS_OUTPUT.PUT_LINE(v_pc_row.Category);
+		
+		--retrieves the next row of data from the table
+		FETCH cur_prod_cat INTO
+		v_pc_row;
+	END LOOP;
+	
+	CLOSE cur_prod_cat; --Closes cursor when finished with it.
+
+--This is where exception handling is carried out.
+EXCEPTION
+	WHEN OTHERS THEN --A cath all exception, which will return info on any errors that occur.
+	raise_application_error(-20001, 'An error ocurred - ' || SQLCODE || ' -ERROR- ' || SQLERRM);
+END;
+/
+
+
+--Example block calling the ListProductCategories procedure
+DECLARE
+	productid NUMBER := 1;
+BEGIN
+	ListProductCategories(productid);
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--The following is a procedure that when called, takes a paramter which indicates an order number.
+--When the precure runs, it prints the details of that order to screen, including order ID, date ordered, status,
+--the customer user name who made the order, as well as a list of products and their price, quantity and subtotals
+--The total cost of the order is calculated and displayed at the end.
+
+CREATE OR REPLACE PROCEDURE OrderDetails
+	(orderid IN NUMBER) --used to select which order to display
+IS	
+	--used to calculate the order total
+	order_total NUMBER := 0;
+
+	--cursor to read in data a row at a time.
+	CURSOR cur_prod IS
+	SELECT o.o_id OrderNum, s.s_name Status,
+	o.date_ordered OrderDate, u.u_username Username,
+	p.p_name Product, op.quantity Quantity, p.p_price Price,
+	op.notes Notes
+	FROM orders o
+	INNER JOIN users u
+	ON u.u_id = o.u_id
+	INNER JOIN order_status s
+	ON s.s_id = o.s_id
+	INNER JOIN order_products op
+	ON op.o_id = o.o_id
+	INNER JOIN products p
+	ON p.p_id = op.p_id
+	WHERE o.o_id = orderid;
+
+
+	--declaring a variable that will have same type as cursor
+	--this means it will have matching columns to the cursor
+	v_ord_row cur_prod%ROWTYPE;
+
+BEGIN
+	OPEN cur_prod; --cursors must be opened to be used.
+
+	--inserts the data from cursor into the variable v_emp_row
+	FETCH cur_prod INTO
+	v_ord_row;
+	
+	DBMS_OUTPUT.PUT_LINE('ORDER ID: ' || v_ord_row.OrderNum || '	Status: ' || v_ord_row.Status);
+	DBMS_OUTPUT.PUT_LINE('Date: ' || v_ord_row.OrderDate || '	Username: ' || v_ord_row.Username);
+	DBMS_OUTPUT.PUT_LINE('
+');
+	DBMS_OUTPUT.PUT_LINE('Products Ordered');
+	--loops while there is still data to retrieve
+	WHILE cur_prod%FOUND LOOP
+		
+		--This loop will print out details of the products included in the order
+		DBMS_OUTPUT.PUT_LINE('Product: ' || v_ord_row.Product || '		Price: ' || v_ord_row.Price);
+		DBMS_OUTPUT.PUT_LINE('Quantity: ' || v_ord_row.Quantity || '			Subtotal: ' || v_ord_row.Quantity * v_ord_row.Price );
+		
+		--takes the subtotal for each product and adds to overall total so that the full order cost can be displayed.
+		order_total := order_total + (v_ord_row.Quantity * v_ord_row.Price);
+
+		--prints out any notes associated with a product on the order list
+		--this allows customers to request alternate components for their product builds
+		IF v_ord_row.Notes IS NOT NULL THEN
+			DBMS_OUTPUT.PUT_LINE('Notes');
+			DBMS_OUTPUT.PUT_LINE(v_ord_row.Notes);
+		END IF;
+		
+		--retrieves the next row of data from the table
+		FETCH cur_prod INTO
+		v_ord_row;
+	END LOOP;
+
+	--prints out the full order cost
+	DBMS_OUTPUT.PUT_LINE('Total: ' || order_total);
+	
+	CLOSE cur_prod; --Closes cursor when finished with it.
+
+--This is where exception handling is carried out.
+EXCEPTION
+	WHEN OTHERS THEN --A cath all exception, which will return info on any errors that occur.
+	raise_application_error(-20001, 'An error ocurred - ' || SQLCODE || ' -ERROR- ' || SQLERRM);	
+END;
+/
+
+
+--The following is an example of a block from which the procedure might be called.
+
+DECLARE
+	orderid NUMBER := 17;
+BEGIN
+	OrderDetails(orderid);
+END;
+/
+
+
+
+

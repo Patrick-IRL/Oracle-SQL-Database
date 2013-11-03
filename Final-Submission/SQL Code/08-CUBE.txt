@@ -1,0 +1,12 @@
+--CUBE query which shows information on users, orders and the costs involved.
+--Displays the total money spent on all orders,
+--The total spent per order
+--and the total spent by each user, in total, and per order.
+
+SELECT u.u_fname Name, o.o_id OrderNum,
+SUM(p.p_price*op.quantity) TOTAL_SALES
+FROM users u
+INNER JOIN orders o ON o.u_id = u.u_id
+INNER JOIN order_products op ON op.o_id = o.o_id
+INNER JOIN products p ON p.p_id = op.p_id
+GROUP BY CUBE(u.u_fname,o.o_id);

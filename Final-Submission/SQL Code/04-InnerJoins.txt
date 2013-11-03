@@ -1,0 +1,47 @@
+--Lists user details, including their Username,
+--First name, last name, and their role (user role)
+SELECT u.u_username Username, u.u_fname Name,
+u.u_lname Surname, r.r_name Role
+FROM users u
+INNER JOIN roles r
+ON r.r_id = u.r_id;
+
+
+
+--Lists all users username, first name, surname and password.
+SELECT u.u_username Username, u.u_fname Name,
+u.u_lname Surname, ps.password Password
+FROM users u
+INNER JOIN passwords ps
+ON ps.pass_id = u.u_id;
+
+
+
+--lists products and their price, type, brand and description
+SELECT p.p_name Product, p.p_price Price,
+t.t_name Type, b.b_name Brand, p.p_description Details
+FROM products p
+INNER JOIN type t
+ON t.t_id = p.t_id
+INNER JOIN brand b
+ON b.b_id = p.b_id;
+
+
+
+--Lists all products and their categories
+SELECT p.p_name Product, c.c_name Category
+FROM products p
+INNER JOIN product_cat pc
+ON pc.p_id = p.p_id
+INNER JOIN category c
+ON c.c_id = pc.c_id
+ORDER BY Product;
+
+
+
+
+
+
+
+
+

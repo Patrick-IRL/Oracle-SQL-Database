@@ -1,0 +1,232 @@
+--roles insert values
+
+INSERT INTO roles(r_name) VALUES('Owner');
+INSERT INTO roles(r_name) VALUES('Administrator');
+INSERT INTO roles(r_name) VALUES('Product Builder');
+INSERT INTO roles(r_name) VALUES('Customer');
+
+
+
+
+--users insert values
+
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Dean','Moorehouse','DeanM','12-APR-1987','0874457613','dean@delectro.com','Cork',1);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Patrick','Moorehouse','PatM','12-APR-1987','0876824913','pat@pm.com','Dublin',2);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Jon','Snow','YouKnowNothing','25-JUN-1990','0864796632','jon@snow.com','Nightswatch',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Rob','Stark','KingInTheNorth','17-AUG-1992','0835492677','rob@stark.com','Winterfell',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Peter','Tierney','musimind','23-NOV-1987','0859467329','peter@tierney.com','Wexford',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Colm','Lindsay','Spearhead','30-SEP-1989','0879413356','colm@lindsay.com','Waterford',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Jamie','Keating','tkdman','28-FEB-1988','0874175926','jamie@keating.com','Dublin',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Conor','Murphy','afrohead','14-JAN-1987','0876251873','conor@murphy.com','Dublin',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Sandor','Clegane','TheHound','19-OCT-1979','0851249656','sandor@clegane.com','Westeros',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Gregor','Clegane','TheMountain','27-SEP-1971','0834913587','gregor@clegane.com','Riverrun',4);
+INSERT INTO users(u_fname,u_lname,u_username,u_dob,u_phone,u_email,u_address,r_id)
+VALUES('Tyrion','Lannister','TheImp','16-DEC-1972','0879471868','tyrion@lannister.com','Mereen',4);
+
+
+--password insert values
+
+INSERT INTO passwords(pass_id,password) VALUES(1,'6e5489457ef44b9f84a0a2b7019f1da5');
+INSERT INTO passwords(pass_id,password) VALUES(2,'1ab76e26511695d23ac19f106b3ab355');
+INSERT INTO passwords(pass_id,password) VALUES(3,'1a4cffe93d13462bfb5a581dfa0ce2d9');
+INSERT INTO passwords(pass_id,password) VALUES(4,'094ee07ea4e609b526386b1a2bcf53ae');
+INSERT INTO passwords(pass_id,password) VALUES(5,'a979c1d02449ddf3ee92107cc7006b04');
+INSERT INTO passwords(pass_id,password) VALUES(6,'2b2f4b80c55eda78aab1f85f9aace09d');
+INSERT INTO passwords(pass_id,password) VALUES(7,'20b14c86bc7b51eb8d89f07c1c81799a');
+INSERT INTO passwords(pass_id,password) VALUES(8,'464032fd8438a0c4071f7f34960ff2c9');
+INSERT INTO passwords(pass_id,password) VALUES(9,'2920f47298132a739520f796a4d11d94');
+INSERT INTO passwords(pass_id,password) VALUES(10,'18075657ae1b3d021ea948b379104564');
+INSERT INTO passwords(pass_id,password) VALUES(11,'f6b8ab2b130aa37939e6587a8b177929');
+
+
+
+
+
+--order_status insert values
+
+INSERT INTO order_status(s_name) VALUES('Submitted');
+INSERT INTO order_status(s_name) VALUES('Pending');
+INSERT INTO order_status(s_name) VALUES('Accepted');
+INSERT INTO order_status(s_name) VALUES('In Progress');
+INSERT INTO order_status(s_name) VALUES('Complete');
+
+
+
+
+--type insert values
+INSERT INTO type(t_name) VALUES('Custom Effects Pedal');
+INSERT INTO type(t_name) VALUES('Modified Effects Pedal');
+INSERT INTO type(t_name) VALUES('Custom Amplifier');
+INSERT INTO type(t_name) VALUES('Modified Amplifier');
+
+
+
+
+--brand inset values
+INSERT INTO brand(b_name) VALUES('Dean Electronics');
+INSERT INTO brand(b_name) VALUES('Boss');
+INSERT INTO brand(b_name) VALUES('Ibanez');
+INSERT INTO brand(b_name) VALUES('Marshall');
+INSERT INTO brand(b_name) VALUES('Fender');
+INSERT INTO brand(b_name) VALUES('Digitech');
+INSERT INTO brand(b_name) VALUES('Roland');
+INSERT INTO brand(b_name) VALUES('Laney');
+INSERT INTO brand(b_name) VALUES('Line6');
+
+
+
+
+--category insert values
+INSERT INTO category(c_name) VALUES('Distortion');
+INSERT INTO category(c_name) VALUES('Overdrive');
+INSERT INTO category(c_name) VALUES('Fuzz');
+INSERT INTO category(c_name) VALUES('Delay');
+INSERT INTO category(c_name) VALUES('Reverb');
+INSERT INTO category(c_name) VALUES('Chorus');
+INSERT INTO category(c_name) VALUES('Flanger');
+INSERT INTO category(c_name) VALUES('Valve');
+INSERT INTO category(c_name) VALUES('Soid-State');
+INSERT INTO category(c_name) VALUES('Modern');
+INSERT INTO category(c_name) VALUES('Vintage');
+INSERT INTO category(c_name) VALUES('Digital');
+INSERT INTO category(c_name) VALUES('Analogue');
+INSERT INTO category(c_name) VALUES('Classic Rock');
+INSERT INTO category(c_name) VALUES('Heavy Metal');
+INSERT INTO category(c_name) VALUES('Compression');
+
+
+
+
+--products insert values
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('DS-1 Ultra Mod',75.00,2,2,'The Keeley Modded BOSS DS-1 Guitar Effect Offers the Finest in Marshall-Amp Tone-In-A-Box!!! Perfect for tones like AC/DC, VAN HALEN, STEVE VAI.');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('DD-3 Digital Delay Mod',95.00,2,2,'Players can now take the industry standard compact delay and select between 2 different smoothing caps that give it an analog delay feel or set it for the stock sound!');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('TS-9 Mod Plus',59.00,2,3,'The Legendary TS9, THE Tube Screamer! A History making pedal! How can it be better? Well, in may ways folks! We take it to the limit of tone nirvana!');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('TS-808 Tubescreamer Mod',50.00,2,3,'The legendary 808 with the finest, most popular set of tone mods you could dream of, The Keeley Plus Mod and True-Bypass clarity and fidelity.');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('RAT Mod',65.00,1,1,'Add much improved sound quality to this classic pedal with these Mods! All of the coupling caps and bass response caps are changed!!! The toggle switch is where it all takes place, making it sound like three unique pedals! Each sound is completely different, giving you a huge tool to carve tone with!');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('4 Knob Compressor',300.00,1,1,'The Keeley Compressor is the award winning industry standard for stomp box compression. The 4 Knob adds Input Clipping and Attack controls to the top of the the original Keeley compressor for easy adjustment.');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('AP Luna Overdrive',280.00,1,1,'Two and a half years in the making, this is the sum of my ideas and thoughts on overdrive and distortion. Endless tonal possibilities are what I strived for and I think you will agree. Enjoy.');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('Fuzz Head',230.00,1,1,'This might be what you have been looking for in an overdrive or fuzz box. The blend between the two is simply wonderful.');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('DM1 Micro amplifier',169.00,3,1,'A micro sized amplifier. Ideal for home practice and recording at low volume, while still driving the tubes hard for great tones!');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('MG30DFX',130.00,4,4,'Modifies the Marshall MG30DFX guitar amp to give it a much warmer, more charismatic sound over the original tone!');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('JF-5A3 RD Retro Deluxe',450.00,3,1,'The Frenzel Retro Deluxe is an amp that a lot of you have been asking for. It is a vintage oldie, using the classic 6SL7s for preamps!');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('Mustang IV',620.00,4,5,'The new Fender® Mustang V.2 amplifier series raises the standard for modern guitar versatility and muscle, including five new amp models, five new effects, intelligent pitch shifting and XLR stereo outputs in Mustang models III, IV and V.');
+
+INSERT INTO products(p_name,p_price,t_id,b_id,p_description)
+VALUES('JCM2000',1800.00,4,4,'The JCM2000 is one of Marshalls most classic, vintage amps. This turbo-charged modified version will melt your face off!');
+
+
+
+--product_cat insert values
+INSERT INTO product_cat(p_id,c_id) VALUES(1,1);
+INSERT INTO product_cat(p_id,c_id) VALUES(1,10);
+INSERT INTO product_cat(p_id,c_id) VALUES(1,14);
+INSERT INTO product_cat(p_id,c_id) VALUES(2,4);
+INSERT INTO product_cat(p_id,c_id) VALUES(2,12);
+INSERT INTO product_cat(p_id,c_id) VALUES(3,1);
+INSERT INTO product_cat(p_id,c_id) VALUES(3,11);
+INSERT INTO product_cat(p_id,c_id) VALUES(4,1);
+INSERT INTO product_cat(p_id,c_id) VALUES(4,11);
+INSERT INTO product_cat(p_id,c_id) VALUES(6,16);
+INSERT INTO product_cat(p_id,c_id) VALUES(7,2);
+INSERT INTO product_cat(p_id,c_id) VALUES(7,14);
+INSERT INTO product_cat(p_id,c_id) VALUES(7,11);
+INSERT INTO product_cat(p_id,c_id) VALUES(8,3);
+INSERT INTO product_cat(p_id,c_id) VALUES(8,10);
+INSERT INTO product_cat(p_id,c_id) VALUES(8,15);
+INSERT INTO product_cat(p_id,c_id) VALUES(9,8);
+INSERT INTO product_cat(p_id,c_id) VALUES(10,10);
+INSERT INTO product_cat(p_id,c_id) VALUES(10,14);
+INSERT INTO product_cat(p_id,c_id) VALUES(10,9);
+INSERT INTO product_cat(p_id,c_id) VALUES(11,11);
+INSERT INTO product_cat(p_id,c_id) VALUES(11,14);
+INSERT INTO product_cat(p_id,c_id) VALUES(11,8);
+INSERT INTO product_cat(p_id,c_id) VALUES(12,15);
+INSERT INTO product_cat(p_id,c_id) VALUES(12,8);
+INSERT INTO product_cat(p_id,c_id) VALUES(13,8);
+INSERT INTO product_cat(p_id,c_id) VALUES(13,15);
+INSERT INTO product_cat(p_id,c_id) VALUES(13,14);
+
+
+
+
+
+--order insert values
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(3,5,'12-JAN-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(4,5,'24-JAN-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(6,4,'07-FEB-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(6,4,'20-FEB-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(3,4,'27-FEB-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(6,3,'10-MAR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(7,3,'24-MAR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(7,3,'30-MAR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(10,3,'03-APR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(9,2,'12-APR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(3,2,'18-APR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(4,2,'18-APR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(10,3,'22-APR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(9,1,'29-APR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(6,1,'30-APR-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(4,1,'04-MAY-13');
+INSERT INTO orders(u_id,s_id,date_ordered) VALUES(11,1,'04-MAY-13');
+
+
+
+
+
+--order_products insert values
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(1,3,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(2,4,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(3,9,1,'I like it with the XLR6 tubes please instead of the standard.');
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(4,2,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(5,6,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(6,1,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(6,8,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(7,4,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(8,7,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(9,12,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(10,10,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(10,8,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(11,5,2,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(12,11,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(13,1,3,'I want 3, so I can make a lot of noise! Can I have 2 with regular diodes and 1 with the extra distortion diode? Thanks.');
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(14,7,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(15,5,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(15,1,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(16,9,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(17,12,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(17,7,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(17,1,1,NULL);
+INSERT INTO order_products(o_id,p_id,quantity,notes) VALUES(17,6,1,NULL);

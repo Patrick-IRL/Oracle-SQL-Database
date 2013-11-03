@@ -1,0 +1,83 @@
+--LEFT JOINS
+
+--Lists all users and their orders, but includes
+--users who have not made any orders
+SELECT u.u_username Username, u.u_fname Name,
+u.u_lname Surname, o.o_id OrderNo, o.date_ordered
+FROM users u
+LEFT OUTER JOIN orders o
+ON o.u_id = u.u_id
+ORDER BY u.u_id, o.o_id;
+
+
+--Lists all products and their categories, but
+--also includes products which do not have any category
+SELECT p.p_name Product,
+c.c_name Category
+FROM products p
+LEFT OUTER JOIN product_cat pc
+ON pc.p_id = p.p_id
+LEFT OUTER JOIN category c
+ON c.c_id = pc.c_id
+ORDER BY Product, Category;
+
+
+
+
+
+-FULL OUTER JOINS
+
+--Lists all Products and their categories
+--Includes products with no category
+--Also includes categories for which no products are available
+SELECT p.p_name Product,
+c.c_name Category
+FROM products p
+LEFT OUTER JOIN product_cat pc
+ON pc.p_id = p.p_id
+FULL OUTER JOIN category c
+ON c.c_id = pc.c_id
+ORDER BY Product, Category;
+
+
+--Lists all users and the products they have ordered
+--Includes users who have not made any orders
+--Also includes products that have not been purchased yet
+SELECT u.u_fname Name, u.u_lname Surname,
+p.p_name Product
+FROM users u
+LEFT OUTER JOIN orders o
+ON o.u_id = u.u_id
+LEFT OUTER JOIN order_products pc
+ON pc.o_id = o.o_id
+FULL OUTER JOIN products p
+ON p.p_id = pc.p_id
+ORDER BY u.u_id, Product;
+
+
+
+
+
+--RIGHT OUTER JOINS
+
+--Lists all products and their brand
+--Includes brands for which no products are on sale
+SELECT p.p_name Product,
+b.b_name Brand
+FROM products p
+RIGHT OUTER JOIN brand b
+ON b.b_id = p.b_id
+ORDER BY Brand;
+
+
+--Lists all orders, the products included in that order
+--and their quantity
+--also lists the products that have not been ordered yet
+SELECT o.o_id OrderNum, o.date_ordered Order_Date,
+p.p_name Product, op.quantity Quantity
+FROM orders o
+INNER JOIN order_products op
+ON op.o_id = o.o_id
+RIGHT OUTER JOIN products p
+ON op.p_id = p.p_id
+ORDER BY OrderNum;

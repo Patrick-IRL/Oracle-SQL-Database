@@ -1,0 +1,196 @@
+--roles Primary key sequence and trigger
+
+CREATE SEQUENCE roles_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER RolesPKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON roles
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT roles_seq.NEXTVAL
+		INTO :NEW.r_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+
+--order_status primary key sequence and trigger
+
+CREATE SEQUENCE order_status_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER Order_StatusPKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON order_status
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT order_status_seq.NEXTVAL
+		INTO :NEW.s_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+
+--type primary key sequence and trigger
+
+CREATE SEQUENCE type_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER TypePKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON type
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT type_seq.NEXTVAL
+		INTO :NEW.t_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+
+--brand primary key sequence and trigger
+
+CREATE SEQUENCE brand_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER BrandPKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON brand
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT brand_seq.NEXTVAL
+		INTO :NEW.b_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+
+--category primary key sequence and trigger
+
+CREATE SEQUENCE category_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER CategoryPKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON category
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT category_seq.NEXTVAL
+		INTO :NEW.c_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+
+--products primary key sequence and trigger
+
+CREATE SEQUENCE products_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER ProductsPKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON products
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT products_seq.NEXTVAL
+		INTO :NEW.p_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+
+--users primary key sequence and trigger
+
+CREATE SEQUENCE users_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER UsersPKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON users
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT users_seq.NEXTVAL
+		INTO :NEW.u_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+
+--orders primary key sequence and trigger
+
+CREATE SEQUENCE orders_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER OrdersPKInsert
+	BEFORE INSERT --trigger is executed before the insert occurs.
+	ON orders
+	FOR EACH ROW
+	BEGIN --Takes the next value from sequence to add into new record.
+		SELECT orders_seq.NEXTVAL
+		INTO :NEW.o_id
+		FROM DUAL;
+END;
+/
+
+
+
+
+
+
+--A trigger that will check if the order status has changed.
+--If the status is the same, the user will be notified that status will not be altered.
+
+CREATE OR REPLACE TRIGGER OrdersStatusUpdate
+	BEFORE UPDATE --trigger is executed before the update occurs.
+	ON orders
+	FOR EACH ROW
+	BEGIN --notifies user if the status is unchanged after an update
+		IF :new.s_id = :old.s_id THEN
+		DBMS_OUTPUT.PUT_LINE('Order information will be updated: Status will remain the same.');
+		END IF;
+END;
+/

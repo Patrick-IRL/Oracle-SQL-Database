@@ -1,0 +1,19 @@
+--Function to count the total number
+--of orders that have been made
+
+CREATE OR REPLACE FUNCTION CountOrders
+RETURN NUMBER
+IS
+	num NUMBER;
+BEGIN
+	SELECT COUNT(o_id)
+	INTO num
+	FROM orders;
+	--statement counts by order ID
+
+	RETURN num;
+END CountOrders;
+/
+
+--Example of how this function might be called.
+SELECT CountOrders() Num_Orders FROM DUAL;
